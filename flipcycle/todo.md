@@ -1,0 +1,39 @@
+# Project TODO
+
+- [x] Public FlipCycle marketing landing page includes hero section, feature highlights, pricing plans, testimonials, and call-to-action.
+- [x] All visible product branding uses "FlipCycle" consistently across landing page, dashboard, metadata, navigation, and empty states.
+- [x] Global design system uses primary #0465F2, accent #0FA4E9, highlight #38bdf8, and smooth blue-to-cyan gradients across key UI elements.
+- [x] Responsive navigation supports desktop and mobile access to marketing sections and authentication actions.
+- [x] Manus OAuth login/signup flow is exposed from public UI and protected dashboard access requires authentication.
+- [x] Dashboard overview shows active deals, total invested, projected profit, and completed flips.
+- [x] Property deal analyzer accepts purchase price, repair costs, ARV, financing details, and calculates profit, ROI, and cash-on-cash return.
+- [x] Comparable sales lookup and ARV estimator are integrated into the deal analyzer experience.
+- [x] Deal pipeline and project tracker supports stages labeled exactly Acquisition, Rehab, Listed, and Sold.
+- [x] Budget and expense tracker per project supports line items for labor, materials, and permits with estimates versus actuals.
+- [x] Document and file upload per project supports contracts, photos, and inspection reports using S3 storage references.
+- [x] Team collaboration management supports project invitations and role labels exactly owner, editor, and viewer.
+- [x] Backend database schema persists projects, expenses, comps, documents, and collaborators with authenticated user ownership.
+- [x] Backend tRPC APIs provide typed procedures for dashboard summary, deal calculations, pipeline updates, budgets, comps, documents, and team management.
+- [x] Frontend dashboard pages connect to tRPC APIs with loading, empty, success, and error states.
+- [x] Accessibility review verifies visible focus rings, semantic landmarks, readable contrast, and keyboard-reachable controls.
+- [x] Vitest coverage validates deal calculations and at least one authenticated workflow-facing API helper.
+- [x] TypeScript check and production build complete without blocking errors.
+- [x] Final checkpoint is saved after all completed checklist items are marked.
+- [x] First-time onboarding sample data can populate realistic projects, budgets, comps, S3-backed sample documents, and team collaborator entries from the dashboard.
+- [x] Create a reusable skill from the FlipCycle full-stack branded web application build workflow using the skill-creator process.
+- [x] Test the branded-webdev-builder skill by applying it to a fresh application concept and reporting reusable-skill findings.
+- [x] Fix the homepage Feature menu navigation so each item routes to a meaningful feature section or page instead of linking back to the homepage.
+- [x] Rename all visible site branding, metadata, and title references to FlipCycle throughout the application.
+- [x] Diagnose why the homepage headline word "FlipCycle" looks visually pasted on or different from the rest of the headline.
+- [x] Convert FlipCycle into a monorepo-style codebase with `frontend/` for Next.js 16 + React 19 TypeScript and `backend/` for FastAPI Python services.
+- [x] Configure the frontend package with Tailwind CSS, Zustand, TanStack Query, React Hook Form, Zod, Recharts, Lucide, Sonner, Google Maps, Capacitor 8, RevenueCat, Stripe.js, Sentry, Vercel Analytics, Vitest, Testing Library, ESLint, and Prettier.
+- [x] Configure the backend package with FastAPI, Uvicorn/Gunicorn, Pydantic v2, SQLAlchemy 2 async, Alembic, psycopg3 PostgreSQL support, Redis integration, JWT/TOTP auth dependencies, Stripe, Resend, Anthropic SDK, boto3 S3, PDF/Excel export libraries, Sentry, Prometheus instrumentation, and JSON logging.
+- [x] Port the FlipCycle landing page, dashboard, deal analyzer, pipeline, budgets, documents, team collaboration, and sample data workflows to the requested stack.
+- [x] Add Vercel deployment configuration for the frontend using region `iad1` and document backend deployment/runtime assumptions.
+- [x] Add frontend and backend tests that validate core FlipCycle branding, deal analysis logic, and API health behavior on the converted stack.
+- [x] Validate the converted stack with available install, test, lint, type-check, or build commands and save a checkpoint.
+- [x] Add editable migrated workflow controls for pipeline stage updates, budget line entry, document upload metadata, collaborator invites, and sample-data seeding in the Next.js dashboard.
+- [x] Add a FastAPI health endpoint contract test for the converted backend stack.
+- [x] Re-run frontend and backend validation after closing workflow and API health gaps, then save a checkpoint.
+- [x] Fix Manus deployment so the converted monorepo produces the expected deployable output and starts without `dist/index.js` or missing `dist` errors.
+- [x] Re-run deployment-oriented install, build, startup, and test validation after fixing the deployment scripts.
