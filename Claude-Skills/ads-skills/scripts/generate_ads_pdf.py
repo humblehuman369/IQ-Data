@@ -51,6 +51,26 @@ COLORS = {
 }
 
 
+def coerce_score(value, default=50):
+    """Coerce an arbitrary value into a numeric score in the 0-100 range.
+
+    Accepts ints, floats, numeric strings ("65", "65.5"), and percent strings
+    ("65%"). Falls back to ``default`` for None, non-numeric strings, or any
+    other unsupported type. This protects downstream arithmetic (e.g. score/100)
+    from TypeError when callers pass loosely-typed JSON values.
+    """
+    if isinstance(value, bool):
+        return default
+    if isinstance(value, (int, float)):
+        return value
+    if isinstance(value, str):
+        try:
+            return float(value.strip().rstrip("%"))
+        except ValueError:
+            return default
+    return default
+
+
 def score_color(score):
     """Return color based on score value."""
     if score >= 80:
@@ -320,8 +340,13 @@ def generate_report(data, output_path):
         categories = default_cats
 
     cat_names = list(categories.keys())
-    cat_scores = [categories[c].get("score", 50) if isinstance(categories[c], dict)
-                  else categories[c] for c in cat_names]
+    cat_scores = [
+        coerce_score(
+            categories[c].get("score", 50) if isinstance(categories[c], dict)
+            else categories[c]
+        )
+        for c in cat_names
+    ]
 
     # Bar chart
     chart = create_bar_chart(cat_names, cat_scores)
@@ -801,8 +826,25 @@ def main():
     input_file = sys.argv[1]
     output_file = sys.argv[2] if len(sys.argv) > 2 else "ADS-STRATEGY-REPORT.pdf"
 
-    with open(input_file, "r") as f:
-        data = json.load(f)
+    try:
+        with open(input_file, "r") as f:
+            data = json.load(f)
+    except FileNotFoundError:
+        print(f"Error: Input file not found: {input_file}")
+        sys.exit(1)
+    except PermissionError:
+        print(f"Error: Permission denied reading file: {input_file}")
+        sys.exit(1)
+    except json.JSONDecodeError as e:
+        print(f"Error: Invalid JSON in {input_file}: {e.msg} (line {e.lineno}, column {e.colno})")
+        sys.exit(1)
+    except OSError as e:
+        print(f"Error: Could not read file {input_file}: {e}")
+        sys.exit(1)
+
+    if not isinstance(data, dict):
+        print(f"Error: Expected JSON object at top level of {input_file}, got {type(data).__name__}")
+        sys.exit(1)
 
     generate_report(data, output_file)
     print(f"Report generated: {output_file}")
